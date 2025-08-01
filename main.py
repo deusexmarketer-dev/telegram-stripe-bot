@@ -2,8 +2,7 @@ import os
 import stripe
 from fastapi import FastAPI, Request
 from telegram import Bot
-from telegram.constants import ChatMemberStatus
-from telegram.ext import Application
+from telegram.ext import ApplicationBuilder
 
 app = FastAPI()
 
@@ -12,7 +11,8 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")
 YOUR_DOMAIN = os.getenv("YOUR_DOMAIN")
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
-application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+
+application = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
 
 
 @app.post("/webhook")
